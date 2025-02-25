@@ -1,12 +1,16 @@
 <script setup>
+import InputLabel from '@/components/ui/input/InputLabel.vue'
 import {
   generate,
   couponQr,
   getData,
-  downloadSVG
+  downloadCoupon,
+  attendance
 } from './coupon.js'
 import { onMounted } from 'vue'
 import { useRoute } from 'vue-router'
+import InputDefault from '@/components/ui/input/InputDefault.vue'
+
 const route = useRoute()
 
 onMounted(() => {
@@ -16,27 +20,106 @@ onMounted(() => {
 </script>
 <template>
   <div
-    @click="downloadSVG(this)"
-    class="flex items-center justify-center w-full h-screen"
+    class="flex items-center justify-center w-full max-h-full"
   >
-    <div
-      href="#"
-      class="block max-w-sm p-6 text-center bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-50"
-    >
-      <h5
-        class="mb-2 text-2xl font-bold tracking-tight text-gray-900"
+    <div>
+      <p
+        class="p-3 text-sm font-bold text-center text-gray-400"
       >
-        Kupon Sahur Puri Asthagina
-      </h5>
-      <div class="pb-5 font-normal text-gray-700">
-        <div
-          id="generatedQrCode"
-          v-html="couponQr"
-        ></div>
-      </div>
-      <p class="text-sm text-gray-400">
         Tap to Download
       </p>
+      <div id="coupon" @click="downloadCoupon()">
+        <div
+          class="block pb-6 text-center bg-green-500 border rounded-t-lg shadow-sm hover:bg-green-600 rounded-b-3xl"
+        >
+          <div
+            class="pt-2 pb-1 pl-6 pr-6 text-white rounded-t-lg"
+          >
+            <h5
+              class="text-2xl font-bold tracking-tight"
+            >
+              Kupon Sahur Puri Asthagina
+            </h5>
+          </div>
+          <div
+            class="pb-6 text-2xl font-normal text-gray-700"
+          >
+            <div
+              id="generatedQrCode"
+              v-html="couponQr"
+            ></div>
+          </div>
+        </div>
+        <div
+          class="block px-1 py-6 bg-green-500 border-t-4 border-black border-dashed rounded-b-lg shadow-sm rounded-t-3xl hover:bg-green-600"
+        >
+          <div
+            class="block p-4 text-black bg-white rounded-lg"
+          >
+            <InputLabel for="nama" class="mt-1"
+              >Nama Lengkap</InputLabel
+            >
+            <InputDefault
+              readonly
+              type="text"
+              name="nama"
+              id="nama"
+              v-model="attendance['Nama Lengkap']"
+            />
+            <InputLabel for="alamat" class="mt-1"
+              >Alamat Kos</InputLabel
+            >
+            <InputDefault
+              readonly
+              type="text"
+              name="alamat"
+              id="alamat"
+              v-model="attendance['Alamat Kos']"
+            />
+            <InputLabel for="phone" class="mt-1"
+              >Nomor Telepon</InputLabel
+            >
+            <InputDefault
+              readonly
+              type="text"
+              name="phone"
+              id="phone"
+              v-model="
+                attendance['Nomor telepon']
+              "
+            />
+            <InputLabel for="email" class="mt-1"
+              >Email</InputLabel
+            >
+            <InputDefault
+              readonly
+              type="text"
+              name="email"
+              id="email"
+              v-model="attendance['Email']"
+            />
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
+
+<!-- Email
+: 
+"bintang.zaman05@gmail.com"
+Nama Lengkap
+: 
+"Bintang Zaman Indrawi "
+Nama blok
+: 
+"AA"
+Nomor blok
+: 
+"1"
+Nomor kamar
+: 
+"Kamar 2"
+Nomor telepon
+: 
+"082268375054" -->

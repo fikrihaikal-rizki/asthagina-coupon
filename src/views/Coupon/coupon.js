@@ -1,13 +1,18 @@
 import { sendRequest } from '@/helpers/requestHelper'
 import router from '@/router'
-import { setErrorMessage } from '@/state/alertState'
+import * as htmlToImage from 'html-to-image'
 import { setLoading } from '@/state/loadingState'
 import { toString } from 'qrcode'
 import { ref } from 'vue'
 
 export const couponQr = ref('')
 export const generate = ref('')
-export const attendance = ref(null)
+export const attendance = ref({
+  Email: null,
+  'Nama Lengkap': null,
+  'Nomor telepon': null,
+  'Alamat Kos': null
+})
 
 export async function getData() {
   setLoading(true)
@@ -17,11 +22,18 @@ export async function getData() {
     { Authorization: 'Bearer ' + generate.value }
   )
 
+  if (coupon == null) {
+    router.push({ name: 'not-found' })
+  }
+
   if (!coupon.status) {
     router.push({ name: 'not-found' })
   }
 
   attendance.value = coupon.data
+  var date = coupon.date.toString().split(' ')
+  date = date[0]
+  attendance.value['date'] = date
   toString(
     attendance.value['QR Code ID'] ?? 'TEST',
     {
@@ -36,21 +48,19 @@ export async function getData() {
   setLoading(false)
 }
 
-export function downloadSVG(evt) {
-  const svgContent = document.getElementById(
-      'generatedQrCode'
-    ).outerHTML,
-    blob = new Blob([svgContent], {
-      type: 'image/svg+xml'
+export function downloadCoupon() {
+  htmlToImage
+    .toBlob(document.getElementById('coupon'))
+    .then(function (blob) {
+      const a = document.createElement('a')
+      a.href = URL.createObjectURL(blob)
+      a.download =
+        attendance.value['Nama Lengkap']
+          .toString()
+          .trim() +
+        '(' +
+        attendance.value['date'] +
+        ').png'
+      a.click()
     })
-  let url = window.URL.createObjectURL(blob)
-  let link = evt.target
-
-  link.target = '_blank'
-  link.download = 'Illustration1.svg'
-  link.href = url
-  let body = document.querySelector('body')
-  body.appendChild(link)
-  link.click()
-  console.log(link)
 }
