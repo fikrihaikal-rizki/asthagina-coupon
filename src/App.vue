@@ -14,8 +14,9 @@ async function checkLink() {
     id: route.params.id
   })
 
+  console.log(result);
   if (!result.status) {
-    router.push({name: 'not-found'})
+    // router.push({name: 'not-found'})
   }
 }
 

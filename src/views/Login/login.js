@@ -43,10 +43,11 @@ export async function submit() {
 
   if (!result.status) {
     setErrorMessage(result.message)
+    return;
   }
 
   router.push(
-    '/' + id.value + '/coupon/' + result.data
+    '/c/' + id.value + '/coupon/' + result.data
   )
 
   setLoading(false)

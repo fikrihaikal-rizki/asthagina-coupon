@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-import { getLoading } from './loadingState'
+import { getLoading, setLoading } from './loadingState'
 
 const infoMessage = ref('')
 const errorMessage = ref('')
@@ -10,11 +10,13 @@ function clear() {
 }
 
 export function setInfoMessage(message) {
+  setLoading(false)
   clear()
   infoMessage.value = message
 }
 
 export function setErrorMessage(message) {
+  setLoading(false)
   clear()
   errorMessage.value = message
 }
