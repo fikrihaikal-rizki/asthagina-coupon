@@ -24,10 +24,12 @@ export async function getData() {
 
   if (coupon == null) {
     router.push({ name: 'not-found' })
+    setLoading(false)
   }
 
   if (!coupon.status) {
     router.push({ name: 'not-found' })
+    setLoading(false)
   }
 
   attendance.value = coupon.data

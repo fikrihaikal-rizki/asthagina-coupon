@@ -2,7 +2,7 @@
 import ButtonPrimary from '@/components/ui/button/ButtonPrimary.vue'
 import InputDefault from '@/components/ui/input/InputDefault.vue'
 import InputLabel from '@/components/ui/input/InputLabel.vue'
-import { phoneNumber, submit, id } from './login'
+import { email, submit, id } from './login'
 import { useRoute } from 'vue-router'
 import { onMounted } from 'vue'
 const route = useRoute()
@@ -30,16 +30,16 @@ onMounted(() => {
         @submit.prevent="submit()"
       >
         <div class="mb-5">
-          <InputLabel for="telephone"
-            >Nomor Telepon Pendaftar</InputLabel
+          <InputLabel for="emailAddress"
+            >Alamat Email Pendaftar</InputLabel
           >
           <InputDefault
-            type="text"
-            name="telephone"
-            id="telephone"
-            placeholder="085xxxxxxxx"
+            type="email"
+            name="emailAddress"
+            id="emailAddress"
+            placeholder="example@email.com"
             required
-            v-model="phoneNumber"
+            v-model="email"
           />
         </div>
         <div class="float-right">

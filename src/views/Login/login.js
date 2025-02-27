@@ -1,20 +1,19 @@
 import { sendRequest } from '@/helpers/requestHelper'
 import router from '@/router'
 import {
-  setErrorMessage,
-  setInfoMessage
+  setErrorMessage
 } from '@/state/alertState'
 import { setLoading } from '@/state/loadingState'
 import { ref } from 'vue'
 
-export const phoneNumber = ref('')
+export const email = ref('')
 export const id = ref('')
 
-function checkPhone() {
-  const phoneRegex =
-    /^(?:\+62|62|0)[2-9]\d{7,11}$/
+function checkEmail() {
+  const regex =
+    /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
 
-  if (phoneRegex.test(phoneNumber.value)) {
+  if (regex.test(email.value)) {
     return true
   }
 
@@ -22,9 +21,9 @@ function checkPhone() {
 }
 
 export async function submit() {
-  if (!checkPhone()) {
+  if (!checkEmail()) {
     setErrorMessage(
-      'Please enter valid phone number.'
+      'Please enter valid email address.'
     )
     return
   }
@@ -33,7 +32,7 @@ export async function submit() {
 
   var body = {
     id: id.value,
-    phone: phoneNumber.value
+    email: email.value
   }
 
   const result = await sendRequest(
@@ -43,7 +42,7 @@ export async function submit() {
 
   if (!result.status) {
     setErrorMessage(result.message)
-    return;
+    return
   }
 
   router.push(
