@@ -7,7 +7,7 @@ import {
   downloadCoupon,
   attendance
 } from './coupon.js'
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import InputDefault from '@/components/ui/input/InputDefault.vue'
 
@@ -30,7 +30,7 @@ onMounted(() => {
       </p>
       <div id="coupon" @click="downloadCoupon()">
         <div
-          class="block pb-6 text-center bg-green-500 border rounded-t-lg shadow-sm hover:bg-green-600 rounded-b-3xl"
+          class="block text-center bg-green-500 border rounded-t-lg shadow-sm hover:bg-green-600 rounded-b-3xl"
         >
           <div
             class="pt-2 pb-1 pl-6 pr-6 text-white rounded-t-lg"
@@ -42,13 +42,18 @@ onMounted(() => {
             </h5>
           </div>
           <div
-            class="pb-6 text-2xl font-normal text-gray-700"
+            class="text-2xl font-normal text-gray-700"
           >
             <div
               id="generatedQrCode"
               v-html="couponQr"
             ></div>
           </div>
+          <p
+            class="py-2 text-xl font-bold tracking-tight text-white"
+          >
+            {{ attendance.linkDate }}
+          </p>
         </div>
         <div
           class="block px-1 py-6 bg-green-500 border-t-4 border-black border-dashed rounded-b-lg shadow-sm rounded-t-3xl hover:bg-green-600"
@@ -104,22 +109,3 @@ onMounted(() => {
     </div>
   </div>
 </template>
-
-<!-- Email
-: 
-"bintang.zaman05@gmail.com"
-Nama Lengkap
-: 
-"Bintang Zaman Indrawi "
-Nama blok
-: 
-"AA"
-Nomor blok
-: 
-"1"
-Nomor kamar
-: 
-"Kamar 2"
-Nomor telepon
-: 
-"082268375054" -->

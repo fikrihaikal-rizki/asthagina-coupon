@@ -5,6 +5,8 @@ import InputLabel from '@/components/ui/input/InputLabel.vue'
 import { email, submit, id } from './login'
 import { useRoute } from 'vue-router'
 import { onMounted } from 'vue'
+import { openModalDisclaimer } from './disclaimer'
+import Disclaimer from './Disclaimer.vue'
 const route = useRoute()
 
 onMounted(() => {
@@ -13,6 +15,7 @@ onMounted(() => {
 </script>
 
 <template>
+  <Disclaimer />
   <div
     class="flex items-center justify-center h-screen"
   >
@@ -27,7 +30,7 @@ onMounted(() => {
       />
       <form
         class="w-[350px] mx-auto p-5"
-        @submit.prevent="submit()"
+        @submit.prevent="openModalDisclaimer(true)"
       >
         <div class="mb-5">
           <InputLabel for="emailAddress"

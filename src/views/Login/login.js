@@ -1,8 +1,6 @@
 import { sendRequest } from '@/helpers/requestHelper'
 import router from '@/router'
-import {
-  setErrorMessage
-} from '@/state/alertState'
+import { setErrorMessage } from '@/state/alertState'
 import { setLoading } from '@/state/loadingState'
 import { ref } from 'vue'
 
