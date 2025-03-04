@@ -16,9 +16,6 @@ function setOpen(openValue) {
     class="absolute z-10 flex items-center justify-center max-h-full backdrop-blur-sm inset-1 bg-gray-400/50"
   >
     <div
-      class="p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full"
-    >
-      <div
         class="relative w-full max-w-md max-h-full"
       >
         <div
@@ -68,6 +65,5 @@ function setOpen(openValue) {
           </div>
         </div>
       </div>
-    </div>
   </div>
 </template>
